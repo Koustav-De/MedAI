@@ -245,6 +245,11 @@
     .third-img img{
         width: 40vw;
     }
+
+    .btn {
+        margin: 5px 43%;
+        width: 120px;
+    }
 </style>
 
 <body>
@@ -254,11 +259,10 @@
                 <p>MedAI</p>
             </div>
             <ul>
-                <a href="/Home">Home</a>
-                <a href="/login.html">Log-In</a>
-                <a href="/about.html">About Us</a>
-                <a href="/contact.html">Contact Us</a>
-                <a href="/blog.html">Blog</a>
+                <a href="/">Home</a>
+                <a href="{{ url_for('login') }}">Log-In</a>
+                <a href="{{ url_for('about') }}">About Us</a>
+                <a href="{{ url_for('contact') }}">Contact Us</a>
             </ul>
         </nav>
     </header>
@@ -274,176 +278,11 @@
             </div>
         </div>
         <div class="separation"></div>
-        <!--Medicine model--> 
-        <h1>MedAI</h1>
-        <div class="container">
-            <form action="/predict" method="post">
-                <div class="form">
-                    <label for="symptoms">Type your symptoms</label>
-                    <input type="text" class="form-control" name="symptoms" placeholder="Give your symptoms"
-                        required="required">
-                </div>
-                <button class="btn">Predict</button>
-            </form>
-        </div>
-        {% if predicted_disease %}
-        <h1>Results</h1>
-        <div class="results">
-            <button class="disease" data-toggle="modal" data-target="#disease">Disease</button>
-            <button class="description" data-toggle="modal" data-target="#description">Description</button>
-            <button class="precaution" data-toggle="modal" data-target="#precaution">Precaution</button>
-            <button class="medication" data-toggle="modal" data-target="#medication">Medication</button>
-            <button class="workout" data-toggle="modal" data-target="#workout">Workout</button>
-            <button class="diet" data-toggle="modal" data-target="#diet">Diet</button>
-        </div>
-        {% endif %}
-
         
-
-        <!-- Disease modal -->
-        <div class="modal fade" id="disease" tabindex="-1" aria-labelledby="diseaseLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Predicted Disease</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>{{predicted_disease}}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Description modal -->
-        <div class="modal fade" id="description" tabindex="-1" aria-labelledby="diseaseLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Description</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>{{dis_desc}}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Precaution modal -->
-        <div class="modal fade" id="precaution" tabindex="-1" aria-labelledby="diseaseLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Precaution</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        
-                            {% for i in dis_pre %}
-                                {{ i }}</br>
-                            {% endfor %}
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Medication modal -->
-        <div class="modal fade" id="medication" tabindex="-1" aria-labelledby="diseaseLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Medication</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        
-                            {% for i in dis_med %}
-                                {{ i }}<br>
-                            {% endfor %}
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Workout modal -->
-        <div class="modal fade" id="workout" tabindex="-1" aria-labelledby="diseaseLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Workout</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    
-                            {% for i in dis_wrkout %}
-                                {{ i }}</br>
-                            {% endfor %}
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Diet modal -->
-        <div class="modal fade" id="diet" tabindex="-1" aria-labelledby="diseaseLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Diet</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        
-                            {% for i in dis_diet %}
-                                {{i}}<br>
-                            {% endfor %}
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <!-- Inline JavaScript -->
-        <script>
-            const myModal = document.getElementById('myModal');
-            const myInput = document.getElementById('myInput');
-
-            myModal.addEventListener('shown.bs.modal', () => {
-                myInput.focus();
-            });
-        </script>
-        <div class="separation"></div>
         <div class="second">
             <div class="second-img">
                 
@@ -465,7 +304,10 @@
                 <img width="" src="{{ url_for('static', filename='Med3.jpg')}}" alt="">
             </div>
         </div>
-        
+
+        <div class="btn">
+            <button type="button" class="btn btn-danger">Get Started</button>
+        </div>
     </main>
 </body>
 </html>

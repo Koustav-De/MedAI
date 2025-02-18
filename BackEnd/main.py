@@ -50,9 +50,10 @@ app = Flask(__name__)
 app.config['STATIC_FOLDER'] = 'static'
 
 # Creating routes
-@app.route('/')
+@app.route("/")
 def index():
     return render_template('index.html')
+
 
 @app.route('/predict', methods = ['POST','GET'])
 def predict():
@@ -68,20 +69,40 @@ def predict():
         my_pre = []
         for i in pre[0]:
             my_pre.append(i)
-        
-        # my_med = []
-        # for i in med[0]:
-        #     my_med.append(i)
-        
-        # my_diet = []
-        # for i in die[0]:
-        #     my_diet.append(i)
-        
-        return render_template('index.html', predicted_disease = predicted_disease, dis_desc = desc, dis_pre = my_pre, dis_med = med, dis_wrkout = wrkout, dis_diet = die)
 
-@app.route('/login')
+        my_med = []
+        for i in med[0]:
+            my_med.append(i)
+
+        my_diet = []
+        for i in die[0]:
+            my_diet.append(i)
+
+        # Convert lists to paragraph format
+        my_med = "\n".join(my_med) if my_med else "No medications available."
+        my_diet = "\n".join(my_diet) if my_diet else "No diet recommendations available."
+
+        
+    return render_template('index.html', predicted_disease = predicted_disease, dis_desc = desc, dis_pre = my_pre, dis_med = med, dis_wrkout = wrkout, dis_diet = die)
+
+@app.route("/login", methods = ['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        pass
     return render_template('login.html')
+
+@app.route("/about", methods = ['GET', 'POST'])
+def about():
+    if request.method == 'POST':
+        pass
+    return render_template('about.html')
+
+@app.route("/contact", methods = ['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        pass
+    return render_template('contact.html')
+
 
 # Python main
 if __name__ == "__main__":
