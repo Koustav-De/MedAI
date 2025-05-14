@@ -1,0 +1,1 @@
+In the MedAI project, I applied a combination of front-end and back-end development skills to build an accessible, lightweight medical diagnostic assistant using only HTML5, CSS, Flask, Python, and Google Colab. The goal was to deliver a user-friendly web interface capable of handling and displaying machine learning results in a healthcare-focused environment.
